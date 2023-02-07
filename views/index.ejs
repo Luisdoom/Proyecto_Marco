@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Nodejs y MondoDb</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    
+    <nav class="navbar navbar-dark bg-dark mb-4">
+      <a class="navbar-brand" href="#">CRUD Nodejs y Mongodb</a>
+      <a href = "/logout"><p>Logout</p></a>
+    </nav>
+
+    <div class="container">
+
+        <div class = "row">
+        <!-- FORMULARIO-->
+        
+        <div class="col-md-5">
+           <div class="card">
+             <div class="card-body">
+              <form action="/add" method="post">
+                <div class="form-group">
+                   <input class="form-control" type="text" name="title" placeholder="Title">
+                </div>
+                <div class="form-group">
+                 <textarea class ="form-control" name="description" cols="80"
+                 placeholder="Add a Description"></textarea>
+                </div>
+               <button class="btn btn-primary" type="submit">
+               Add
+               </button>
+              </form>
+             </div>
+           </div>
+        </div>
+
+        <div class="col-md-7">
+            <table class= "table table-bordered table-hover">
+            
+                <thead>
+                    <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Operations</th>
+                    </tr>
+            
+                </thead>
+                <tbody>
+                   
+                    <%  for (let i =0;i<tasks.length; i++)     {   %>
+
+                    <tr>
+
+                    <td> <%= i+1   %>   </td>
+                    <td> <strong><%= tasks[i].title  %>  </strong>   </td>
+                    <td><%= tasks[i].description  %></td>
+                    <td>
+                    <a href="/status/<%= tasks[i]._id  %>" class="<%= tasks[i].status ? "btn btn-success" :  "btn btn-dark"  %>"><%= tasks[i].status ? "Done" :  "Pending"  %></a>
+                    <a href="/delete/<%= tasks[i]._id  %>"class="btn btn-danger">Delete</a>
+                    <a href="/edit/<%= tasks[i]._id  %>"class="btn btn-info">Edit</a>
+                    </td>
+                    </tr>
+
+                    <%   }     %>
+
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+
+</body>
+
+
+</html>
